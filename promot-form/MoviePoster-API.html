@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: black;
+        /* display: flex;*/
+    }
+
+    h1 {
+        color: white;
+        margin-left: 500px;
+        margin-top: 20px;
+        font-size: 3rem;
+    }
+
+    form {
+        margin-top: 10px;
+        margin-left: 570px;
+    }
+
+    .place {
+        width: 20%;
+        height: 25px;
+        border-radius: 5px;
+    }
+
+    button {
+        height: 25px;
+        margin-left: 5px;
+        border-radius: 5px;
+
+    }
+
+    .image-container {
+        max-width: 90%;
+        margin-left: 140px;
+        margin-top: 40px;
+
+    }
+</style>
+
+<body>
+    <h1>Movie Search API </h1>
+    <form>
+        <input type="text" placeholder=" Search Movie Poster " class="place">
+        <button class="movie">FETCH</button>
+    </form>
+    <div class="image-container">
+
+    </div>
+
+</body>
+<script>
+    let form = document.querySelector('form ')
+    let container = document.querySelector('.image-container')
+
+    form.addEventListener('submit', (e) => {
+        event.preventDefault();
+        let select = form.querySelector('input').value;
+
+        API(select)
+
+    })
+
+    async function API(select) {
+        let res = await fetch(`https://api.tvmaze.com/search/shows?q=${select}`)
+        let finalres = await res.json()
+
+        allimages(finalres)
+
+
+    }
+
+    function allimages(finalres) {
+
+        finalres.forEach(movie => {
+            let src = movie.show.image.medium
+
+            let img = document.createElement('img')
+            img.src = src
+            container.appendChild(img)
+        });
+    }
+</script>
+
+</html>

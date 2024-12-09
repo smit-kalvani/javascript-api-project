@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="style1.css">
+<div class="form-container">
+    <h2>Fill the Form</h2>
+    <form id="userForm">
+        <input type="text" id="Title" placeholder="Title" required>
+        <input type="text" id="IMGLink" placeholder="IMGLink" required>
+        <input type="number" id="Price" placeholder="Price" required>
+        <input type="text" id="Description" placeholder="Description" required>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div class="cards-container" id="cardsContainer"></div>
+
+<script>
+    document.getElementById('userForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        
+        const Title = document.getElementById('Title').value;
+        const img = document.getElementById('IMGLink').value;
+        const price = document.getElementById('Price').value;
+        const des = document.getElementById('Description').value;
+
+      
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        card.innerHTML = `
+            <img src="${img}"></img>
+            <p><strong>Title:</strong> ${Title}</p>
+            <p><strong>Price:</strong> $${price}</p>
+            <p><strong>Description:</strong> ${des}</p>
+            <a href="https://www.forbes.com/sites/swetakaushal/2024/12/04/pushpa-2-the-rule-registers-record-advance-ticket-sales/"><Button>Book Now</button></a>
+        `;
+
+        document.getElementById('cardsContainer').appendChild(card);
+
+        document.getElementById('userForm').reset();
+    });
+</script>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+    <label for="dogs">Choose a Bread</label>
+
+    <select id="select1">
+        <option value="pug">Pug</option>
+        <option value="pomeranian">Pomeranian</option>
+        <option value="akita">Akita</option>
+        <option value="labrador">Labrador</option>
+    </select>
+
+    <button onclick="getOption()">Fetch</button>
+
+    <div class="output">
+    </div>
+    <img src="https://cdn.stocksnap.io/img-thumbs/280h/dog-animal_DOTORLBDD7.jpg" id="image" width="45%">
+</body>
+<script>
+
+    async function getOption() {
+        let selectElement = document.querySelector('#select1');
+        let output = selectElement.value;
+        document.querySelector('.output')
+
+        try {
+            let res = await fetch(`https://dog.ceo/api/breed/${output}/images/random`);
+
+            let finalRes = await res.json();
+
+            let img = document.getElementById('image')
+
+            img.src = finalRes.message
+
+        } catch (err) {
+            console.log(err);
+
+        }
+
+
+    }
+
+
+
+</script>
+
+</html>
